@@ -1,47 +1,133 @@
 import { useMemo, useState } from 'react';
 import AppShell from '../../shared/layout/AppShell';
 import Button from '../../shared/ui/Button';
-import Tag from '../../shared/ui/Tag';
 
 const columns = [
   {
     title: 'Planned',
     count: '3 open tasks',
     cards: [
-      { title: 'Monthly Product Discussion', due: '24 Jan 2023', labels: ['internal', 'marketing', 'urgent'], comments: 19, files: 5 },
-      { title: 'Update New Social Media Post', due: '18 Jan 2023', labels: ['marketing', 'event', 'urgent'], comments: 1, files: 1 },
-      { title: 'Input Data for Monthly Sales Revenue', due: '31 Jan 2023', labels: ['internal', 'document', 'marketing'], comments: 0, files: 2 }
+      {
+        title: 'Monthly Product Discussion',
+        due: '24 Jan 2023',
+        labels: ['internal', 'marketing', 'urgent'],
+        comments: 19,
+        files: 5,
+        checklist: '10/124',
+        members: ['AR', 'JD', 'LM', 'PS']
+      },
+      {
+        title: 'Update New Social Media Post',
+        due: '18 Jan 2023',
+        labels: ['marketing', 'event', 'urgent'],
+        comments: 1,
+        files: 1,
+        checklist: '12/52',
+        members: ['JW', 'BK', 'AT']
+      },
+      {
+        title: 'Input Data for Monthly Sales Revenue',
+        due: '31 Jan 2023',
+        labels: ['internal', 'document', 'marketing'],
+        comments: 0,
+        files: 2,
+        checklist: '4/5',
+        members: ['AN', 'CW']
+      }
     ]
   },
   {
     title: 'Upcoming',
     count: '5 open tasks',
     cards: [
-      { title: 'Create Monthly Revenue Recap for AI Product Linear', due: '11 Jan 2023', labels: ['report', 'event', 'urgent'], comments: 1, files: 0 },
-      { title: 'Uploading New Items to Marketplace', due: '09 Jan 2023', labels: ['report', 'document', 'marketing'], comments: 23, files: 1 },
-      { title: 'Monthly Product Discussion', due: '12 Jan 2023', labels: ['internal', 'marketing', 'urgent'], comments: 51, files: 2 },
-      { title: 'Update New Social Media Post', due: '15 Jan 2023', labels: ['marketing', 'event', 'urgent'], comments: 3, files: 4 },
-      { title: 'Input Data for Monthly Sales Revenue', due: '15 Jan 2023', labels: ['marketing', 'event', 'urgent'], comments: 15, files: 1 }
+      {
+        title: 'Create Monthly Revenue Recap for AI Product Linear',
+        due: '11 Jan 2023',
+        labels: ['report', 'event', 'urgent'],
+        comments: 1,
+        files: 0,
+        checklist: '4/12',
+        members: ['DR', 'LF']
+      },
+      {
+        title: 'Uploading New Items to Marketplace',
+        due: '09 Jan 2023',
+        labels: ['report', 'document', 'marketing'],
+        comments: 23,
+        files: 1,
+        checklist: '12/64',
+        members: ['CM', 'RT', 'NG']
+      },
+      {
+        title: 'Monthly Product Discussion',
+        due: '12 Jan 2023',
+        labels: ['internal', 'marketing', 'urgent'],
+        comments: 51,
+        files: 2,
+        checklist: '3/4',
+        members: ['AW', 'PS', 'KL', 'CE']
+      },
+      {
+        title: 'Update New Social Media Post',
+        due: '15 Jan 2023',
+        labels: ['marketing', 'event', 'urgent'],
+        comments: 3,
+        files: 4,
+        checklist: '0/12',
+        members: ['FK', 'SR', 'NL']
+      },
+      {
+        title: 'Input Data for Monthly Sales Revenue',
+        due: '15 Jan 2023',
+        labels: ['marketing', 'event', 'urgent'],
+        comments: 15,
+        files: 1,
+        checklist: '3/4',
+        members: ['LM', 'AG', 'TW', 'PE']
+      }
     ]
   },
   {
     title: 'Completed',
     count: '2 completed tasks',
     cards: [
-      { title: 'Uploading New Items to Marketplace', due: '09 Jan 2023', labels: ['report', 'document', 'marketing'], comments: 1, files: 12 },
-      { title: 'Input Data for Monthly Sales Revenue', due: '13 Jan 2023', labels: ['internal', 'document', 'marketing'], comments: 21, files: 2 }
+      {
+        title: 'Uploading New Items to Marketplace',
+        due: '09 Jan 2023',
+        labels: ['report', 'document', 'marketing'],
+        comments: 1,
+        files: 12,
+        checklist: '2/15',
+        members: ['KM', 'AE']
+      },
+      {
+        title: 'Input Data for Monthly Sales Revenue',
+        due: '13 Jan 2023',
+        labels: ['internal', 'document', 'marketing'],
+        comments: 21,
+        files: 2,
+        checklist: '1/53',
+        members: ['BF', 'LM']
+      }
     ]
   }
 ];
 
 const TasksPage = () => {
   const [openDetails, setOpenDetails] = useState(false);
+
   const actions = useMemo(
     () => (
       <>
-        <Button variant="outline">Sort By</Button>
-        <Button variant="outline">Filter</Button>
-        <Button onClick={() => setOpenDetails(true)}>Add Task</Button>
+        <Button variant="outline" className="h-10 rounded-md border-[#1e1e20] px-4 text-[14px] font-semibold">
+          Sort By
+        </Button>
+        <Button variant="outline" className="h-10 rounded-md border-[#1e1e20] px-4 text-[14px] font-semibold">
+          Filter
+        </Button>
+        <Button className="h-10 rounded-md px-4 text-[14px] font-semibold" onClick={() => setOpenDetails(true)}>
+          + Add Task
+        </Button>
       </>
     ),
     []
@@ -50,31 +136,66 @@ const TasksPage = () => {
   return (
     <>
       <AppShell title="Task" actions={actions}>
+        <section className="mb-4 border-b border-venture-line">
+          <div className="flex items-center gap-8 pb-3 text-[16px]">
+            <button type="button" className="text-zinc-500">
+              ▤ List
+            </button>
+            <button type="button" className="border-b-2 border-black pb-3 font-medium text-black">
+              ▯ Kanban
+            </button>
+            <button type="button" className="text-zinc-500">
+              ▦ Table
+            </button>
+          </div>
+        </section>
+
         <div className="grid gap-4 xl:grid-cols-3">
           {columns.map((column) => (
-            <section key={column.title} className="rounded-card border border-venture-line bg-white p-3">
-              <div className="mb-3 flex items-center justify-between">
-                <h3 className="font-display text-2xl font-semibold">{column.title}</h3>
-                <span className="text-xs text-zinc-500">{column.count}</span>
+            <section key={column.title} className="rounded-[8px] border border-venture-line bg-white p-4">
+              <div className="mb-4 flex items-center gap-3">
+                <span className={`h-2.5 w-2.5 rounded-full ${column.title === 'Planned' ? 'bg-[#b7aa13]' : column.title === 'Upcoming' ? 'bg-[#6e83f8]' : 'bg-[#32b579]'}`} />
+                <h3 className="text-[20px] font-semibold leading-none">{column.title}</h3>
+                <span className="text-[14px] text-zinc-500">{column.count}</span>
               </div>
-              <Button variant="subtle" className="mb-3 w-full">
+
+              <button type="button" className="mb-4 flex h-11 w-full items-center justify-center gap-2 rounded-md bg-[#f3f3f4] text-[18px] font-medium text-black">
                 + Create Task
-              </Button>
+              </button>
+
               <div className="space-y-3">
                 {column.cards.map((card) => (
-                  <article key={`${column.title}-${card.title}-${card.due}`} className="rounded-lg border border-venture-line bg-white p-3">
-                    <div className="mb-2 flex flex-wrap gap-2">
-                      {card.labels.map((label) => (
-                        <Tag key={label} type={label}>
-                          {label}
-                        </Tag>
-                      ))}
+                  <article key={`${column.title}-${card.title}-${card.due}`} className="rounded-[8px] border border-venture-line bg-[#fbfbfc] p-4">
+                    <div className="mb-4 flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap gap-2">
+                        {card.labels.map((label) => (
+                          <LabelChip key={label} label={label} />
+                        ))}
+                      </div>
+                      <button type="button" className="text-zinc-400">
+                        •••
+                      </button>
                     </div>
-                    <h4 className="font-semibold">{card.title}</h4>
-                    <p className="mt-2 text-xs text-zinc-500">Due Date {card.due}</p>
-                    <div className="mt-2 flex items-center gap-3 text-xs text-zinc-500">
-                      <span>{card.files} files</span>
-                      <span>{card.comments} comments</span>
+
+                    <h4 className="text-[18px] font-semibold leading-tight">{card.title}</h4>
+
+                    <div className="mt-4 flex items-center justify-between text-[14px] text-zinc-500">
+                      <span className="inline-flex items-center gap-2">🗓 Due Date {card.due}</span>
+                      <span className="inline-flex items-center gap-1">☷ {card.checklist}</span>
+                    </div>
+
+                    <div className="mt-4 flex items-center justify-between">
+                      <div className="flex -space-x-2">
+                        {card.members.map((member) => (
+                          <div key={member} className="flex h-7 w-7 items-center justify-center rounded-full border border-white bg-zinc-300 text-[9px] font-semibold text-zinc-700">
+                            {member}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-4 text-[14px] text-zinc-500">
+                        <span className="inline-flex items-center gap-1">⌕ {card.files}</span>
+                        <span className="inline-flex items-center gap-1">◌ {card.comments}</span>
+                      </div>
                     </div>
                   </article>
                 ))}
@@ -86,6 +207,23 @@ const TasksPage = () => {
 
       {openDetails ? <TaskDetailsModal onClose={() => setOpenDetails(false)} /> : null}
     </>
+  );
+};
+
+const LabelChip = ({ label }) => {
+  const palette = {
+    internal: 'bg-[#f5eadf] text-[#9f6c3b]',
+    marketing: 'bg-[#f2efcf] text-[#9b8a1f]',
+    urgent: 'bg-[#f8e7e7] text-[#ba4848]',
+    report: 'bg-[#e0f0e6] text-[#2e8b4c]',
+    event: 'bg-[#efe4fb] text-[#8950c8]',
+    document: 'bg-[#e4ebff] text-[#3c69de]'
+  };
+
+  return (
+    <span className={`inline-flex rounded-md px-2 py-1 text-[12px] font-medium capitalize ${palette[label] || 'bg-zinc-100 text-zinc-700'}`}>
+      {label}
+    </span>
   );
 };
 
@@ -181,8 +319,8 @@ const TaskDetailsModal = ({ onClose }) => (
               <button type="button">+</button>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Tag type="internal">Internal</Tag>
-              <Tag type="marketing">Marketing</Tag>
+              <LabelChip label="internal" />
+              <LabelChip label="marketing" />
             </div>
           </section>
 

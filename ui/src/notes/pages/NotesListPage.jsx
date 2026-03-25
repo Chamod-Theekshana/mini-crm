@@ -50,10 +50,15 @@ const NotesListPage = () => {
 
   const actions = (
     <>
-      <Button variant="outline">Sort By</Button>
-      <Button variant="outline">Filter</Button>
+      <Button variant="outline" className="h-10 rounded-md border-[#1d1d1f] px-4 text-[14px]">
+        Sort By
+      </Button>
+      <Button variant="outline" className="h-10 rounded-md border-[#1d1d1f] px-4 text-[14px]">
+        Filter
+      </Button>
+      <span className="mx-1 h-6 w-px bg-venture-line" />
       <Link to="/notes/new">
-        <Button>Add Notes</Button>
+        <Button className="h-10 rounded-md px-4 text-[14px]">Add Notes</Button>
       </Link>
     </>
   );
@@ -67,7 +72,7 @@ const NotesListPage = () => {
       {!loading && notes.length === 0 ? <EmptyNotes /> : null}
 
       {!loading && notes.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
           {notes.map((note) => (
             <NoteCard key={note._id} note={note} onDelete={setSelectedNote} />
           ))}

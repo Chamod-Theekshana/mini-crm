@@ -58,13 +58,13 @@ const LoginPage = () => {
         </aside>
 
         <main className="flex items-center px-5 py-8 sm:px-8 lg:px-10">
-          <div className="w-full max-w-[430px] rounded-2xl bg-transparent p-2 sm:p-4">
+          <div className="w-full mt-[80px] max-w-[430px] rounded-2xl bg-transparent p-2 sm:p-4">
             <div className="mb-8 flex items-center gap-3">
               <img src={logoImageSrc} alt="Venture logo" className="h-6 w-6 object-contain" />
-              <p className="font-display text-[40px] font-semibold tracking-tight text-venture-ink">Venture</p>
+              <p className="font-display text-[20px] font-semibold tracking-tight text-venture-ink">Venture</p>
             </div>
 
-            <h1 className="font-display text-[44px] font-semibold leading-tight text-venture-ink">Nice to see you again</h1>
+            <h1 className="font-display text-[20px] font-semibold leading-tight text-venture-ink">Nice to see you again</h1>
 
             <form className="mt-8 space-y-4" onSubmit={onSubmit}>
               <label className="flex flex-col gap-2 text-xs font-semibold text-zinc-600">
