@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/context/AuthContext';
 
 const menu = [
@@ -22,7 +22,13 @@ const bottomMenu = [
 ];
 
 const AppShell = ({ title, actions, children }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <div className="min-h-screen bg-[#f3f3f4] text-venture-ink">
@@ -110,6 +116,16 @@ const AppShell = ({ title, actions, children }) => {
                 )}
               </NavLink>
             ))}
+          </div>
+
+          <div className="mt-auto border-t border-[#dfdfe1] px-3 py-4">
+            <button
+              type="button"
+              onClick={onLogout}
+              className="flex w-full items-center justify-center rounded-[6px] border border-[#1c1c1f] bg-white px-3 py-[9px] text-[14px] font-semibold text-[#111111] hover:bg-zinc-50"
+            >
+              Logout
+            </button>
           </div>
         </aside>
 
