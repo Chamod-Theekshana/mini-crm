@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111111;
+  background: #f6f6f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 30% 20%, #fefefe 0%, #f5f5f7 52%, #f2f2f4 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .panel-border {
+    @apply border border-venture-line;
+  }
+
+  .chip {
+    @apply inline-flex rounded-md px-2 py-1 text-xs font-medium;
+  }
+}
