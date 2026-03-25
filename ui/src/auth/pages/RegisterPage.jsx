@@ -23,7 +23,7 @@ const RegisterPage = () => {
 
     try {
       await register(form);
-      navigate('/notes', { replace: true });
+      navigate('/dashboard', { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Try again.');
     } finally {

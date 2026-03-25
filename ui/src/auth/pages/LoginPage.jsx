@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import AuthLayout from '../../shared/layout/AuthLayout';
-import Input from '../../shared/ui/Input';
-import Button from '../../shared/ui/Button';
 import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const logoImageSrc = '/Logogram.png';
+  const heroImageSrc = '/Group 31.png';
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const from = location.state?.from || '/notes';
+  const from = location.state?.from || '/dashboard';
 
   const onChange = (event) => {
     setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -35,47 +35,119 @@ const LoginPage = () => {
   };
 
   return (
-    <AuthLayout>
-      <div className="w-full max-w-[420px] rounded-card bg-white p-7 shadow-panel sm:p-8">
-        <p className="font-display text-[40px] font-bold tracking-tight">Venture</p>
-        <h1 className="mt-5 font-display text-3xl font-bold text-venture-ink">Nice to see you again</h1>
+    <div className="min-h-screen bg-[#efefef]">
+      <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[66%_34%]">
+        <aside className="relative hidden bg-venture-navy p-12 text-white lg:flex lg:flex-col">
+          <div className="flex items-center gap-3">
+            <img src={logoImageSrc} alt="Venture logo" className="h-10 w-10 object-contain" />
+            <p className="font-display text-5xl font-semibold tracking-tight">Venture</p>
+          </div>
 
-        <form className="mt-7 space-y-4" onSubmit={onSubmit}>
-          <Input
-            label="Login"
-            placeholder="Email or phone number"
-            name="email"
-            value={form.email}
-            onChange={onChange}
-            type="email"
-            required
-          />
-          <Input
-            label="Password"
-            placeholder="Enter password"
-            name="password"
-            value={form.password}
-            onChange={onChange}
-            type="password"
-            required
-          />
-          {error ? <p className="text-sm text-red-600">{error}</p> : null}
+          <div className="mt-12 max-w-xl">
+            <p className="font-display text-5xl font-semibold leading-tight">Sign in to</p>
+            <p className="mt-2 text-5xl font-semibold leading-tight">Lorem Ipsum is simply</p>
+            <p className="mt-6 text-lg text-zinc-200">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            </p>
+          </div>
 
-          <Button type="submit" className="w-full" isLoading={isSubmitting}>
-            Sign in
-          </Button>
-        </form>
+          <div className="mt-auto flex items-end justify-center">
+            <img src={heroImageSrc} alt="Sign in illustration" className="w-full max-w-[620px] object-contain" />
+          </div>
+        </aside>
 
-        <div className="my-6 h-px bg-venture-line" />
+        <main className="flex items-center px-5 py-8 sm:px-8 lg:px-10">
+          <div className="w-full max-w-[430px] rounded-2xl bg-transparent p-2 sm:p-4">
+            <div className="mb-8 flex items-center gap-3">
+              <img src={logoImageSrc} alt="Venture logo" className="h-6 w-6 object-contain" />
+              <p className="font-display text-[40px] font-semibold tracking-tight text-venture-ink">Venture</p>
+            </div>
 
-        <p className="text-center text-sm text-zinc-600">
-          Do not have an account?{' '}
-          <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700">
-            Sign up now
-          </Link>
-        </p>
+            <h1 className="font-display text-[44px] font-semibold leading-tight text-venture-ink">Nice to see you again</h1>
+
+            <form className="mt-8 space-y-4" onSubmit={onSubmit}>
+              <label className="flex flex-col gap-2 text-xs font-semibold text-zinc-600">
+                <span>Login</span>
+                <div className="relative">
+                  <input
+                    placeholder="Email or phone number"
+                    name="email"
+                    value={form.email}
+                    onChange={onChange}
+                    type="email"
+                    required
+                    className="h-12 w-full rounded-lg border border-zinc-200 bg-zinc-100 px-4 pr-12 text-base text-zinc-800 outline-none transition focus:border-zinc-400 focus:bg-white"
+                  />
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500">@</span>
+                </div>
+              </label>
+
+              <label className="flex flex-col gap-2 text-xs font-semibold text-zinc-600">
+                <span>Password</span>
+                <div className="relative">
+                  <input
+                    placeholder="Enter password"
+                    name="password"
+                    value={form.password}
+                    onChange={onChange}
+                    type="password"
+                    required
+                    className="h-12 w-full rounded-lg border border-zinc-200 bg-zinc-100 px-4 pr-12 text-base text-zinc-800 outline-none transition focus:border-zinc-400 focus:bg-white"
+                  />
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500">o</span>
+                </div>
+              </label>
+
+              <div className="flex items-center justify-between gap-4 pt-1 text-sm">
+                <label className="flex cursor-pointer items-center gap-2 text-zinc-700">
+                  <button
+                    type="button"
+                    onClick={() => setRememberMe((prev) => !prev)}
+                    className={`relative h-5 w-9 rounded-full transition ${rememberMe ? 'bg-zinc-700' : 'bg-zinc-200'}`}
+                    aria-label="Toggle remember me"
+                  >
+                    <span
+                      className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition ${rememberMe ? 'left-4' : 'left-0.5'}`}
+                    />
+                  </button>
+                  <span>Remember me</span>
+                </label>
+                <button type="button" className="font-medium text-blue-600 hover:text-blue-700">
+                  Forgot password?
+                </button>
+              </div>
+
+              {error ? <p className="text-sm text-red-600">{error}</p> : null}
+
+              <button
+                type="submit"
+                className="mt-1 h-12 w-full rounded-lg bg-venture-navy text-base font-semibold text-white transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Please wait...' : 'Sign in'}
+              </button>
+            </form>
+
+            <div className="my-8 h-px bg-zinc-200" />
+
+            <button
+              type="button"
+              className="flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-zinc-800 text-sm font-medium text-white transition hover:bg-zinc-700"
+            >
+              <span className="text-lg">G</span>
+              <span>Or sign in with Google</span>
+            </button>
+
+            <p className="mt-6 text-center text-sm text-zinc-600">
+              Dont have an account?{' '}
+              <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700">
+                Sign up now
+              </Link>
+            </p>
+          </div>
+        </main>
       </div>
-    </AuthLayout>
+    </div>
   );
 };
 

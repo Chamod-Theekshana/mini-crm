@@ -12,7 +12,12 @@ const palette = {
   urgent: 'bg-chip-red text-[#9f2f2f]',
   report: 'bg-chip-green text-[#2d7b43]',
   document: 'bg-chip-blue text-[#2e58c6]',
-  event: 'bg-chip-violet text-[#7541a9]'
+  event: 'bg-chip-violet text-[#7541a9]',
+  active: 'bg-chip-blue text-[#2e58c6]',
+  lead: 'bg-chip-orange text-[#995e24]',
+  employee: 'bg-chip-violet text-[#7541a9]',
+  customers: 'bg-chip-blue text-[#2e58c6]',
+  partners: 'bg-chip-yellow text-[#92731b]'
 };
 
 const Tag = ({ children, type = 'weekly' }) => {

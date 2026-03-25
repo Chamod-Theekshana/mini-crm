@@ -2,12 +2,23 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/context/AuthContext';
 
 const menu = [
-  { label: 'Dashboard', path: '/notes' },
-  { label: 'Notifications', path: '/notes' },
+  { label: 'Dashboard', path: '/dashboard' },
+  { label: 'Notifications', path: '/notifications' },
   { label: 'Notes', path: '/notes' },
-  { label: 'Tasks', path: '/notes' },
-  { label: 'Emails', path: '/notes' },
-  { label: 'Calendars', path: '/notes' }
+  { label: 'Tasks', path: '/tasks' },
+  { label: 'Emails', path: '/emails' },
+  { label: 'Calendars', path: '/calendars' }
+];
+
+const dbMenu = [
+  { label: 'Analytics', path: '/analytics' },
+  { label: 'Contacts', path: '/contacts' },
+  { label: 'Companies', path: '/companies' }
+];
+
+const bottomMenu = [
+  { label: 'Integrations', path: '/integrations' },
+  { label: 'Settings', path: '/settings' }
 ];
 
 const AppShell = ({ title, actions, children }) => {
@@ -20,46 +31,88 @@ const AppShell = ({ title, actions, children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f7f8] text-venture-ink">
-      <div className="grid min-h-screen grid-cols-1 xl:grid-cols-[216px_1fr]">
-        <aside className="border-r border-venture-line bg-[#f4f4f5]">
-          <div className="border-b border-venture-line px-6 py-5">
-            <Link to="/notes" className="font-display text-3xl font-bold tracking-tight">
+    <div className="min-h-screen bg-[#f3f3f4] text-venture-ink">
+      <div className="grid min-h-screen grid-cols-1 xl:grid-cols-[190px_1fr]">
+        <aside className="flex min-h-screen flex-col border-r border-venture-line bg-[#f2f2f3]">
+          <div className="border-b border-venture-line px-5 py-4">
+            <Link to="/dashboard" className="font-display text-[36px] font-bold tracking-tight">
               Venture
             </Link>
           </div>
-          <nav className="space-y-1 px-4 py-5">
+
+          <nav className="space-y-1 px-3 py-4">
             {menu.map((item) => (
               <NavLink
                 key={item.label}
                 to={item.path}
                 className={({ isActive }) =>
-                  `block rounded-lg px-4 py-2 text-sm font-medium ${isActive ? 'bg-zinc-200 text-zinc-900' : 'text-zinc-600 hover:bg-zinc-200/60'}`
+                  `block rounded-md px-3 py-2 text-sm ${isActive ? 'bg-zinc-200 text-black' : 'text-zinc-600 hover:bg-zinc-200/60'}`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
           </nav>
-          <div className="mt-auto border-t border-venture-line px-4 py-4">
-            <button
-              type="button"
-              className="w-full rounded-lg border border-venture-line bg-white py-2 text-sm font-semibold hover:bg-zinc-50"
-              onClick={onLogout}
-            >
+
+          <div className="border-y border-venture-line px-3 py-4">
+            <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">Database</p>
+            <div className="space-y-1">
+              {dbMenu.map((item) => (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `block rounded-md px-3 py-2 text-sm ${isActive ? 'bg-zinc-200 text-black' : 'text-zinc-600 hover:bg-zinc-200/60'}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1 px-3 py-4">
+            {bottomMenu.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                className={({ isActive }) =>
+                  `block rounded-md px-3 py-2 text-sm ${isActive ? 'bg-zinc-200 text-black' : 'text-zinc-600 hover:bg-zinc-200/60'}`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+
+          <div className="mt-auto border-t border-venture-line px-3 py-4">
+            <div className="mb-3 rounded-md border border-venture-line bg-white px-3 py-2 text-sm font-medium">Marketing Team's</div>
+            <button type="button" className="w-full rounded-md border border-venture-line bg-white py-2 text-sm font-semibold hover:bg-zinc-50" onClick={onLogout}>
               Logout
             </button>
           </div>
         </aside>
+
         <section>
-          <header className="flex flex-wrap items-center justify-between gap-4 border-b border-venture-line bg-[#f7f7f8] px-6 py-4 sm:px-8">
-            <h1 className="font-display text-[30px] font-bold leading-none tracking-tight">{title}</h1>
-            <div className="flex items-center gap-3">
-              {actions}
-              <div className="rounded-full bg-white px-4 py-2 text-sm shadow-panel">{user?.name || 'User'}</div>
+          <header className="border-b border-venture-line bg-[#f6f6f6] px-4 py-3 sm:px-6">
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <div className="flex w-full max-w-sm items-center gap-2 rounded-md border border-venture-line bg-white px-3 py-2 text-sm text-zinc-400">
+                <span>Search</span>
+              </div>
+              <div className="flex items-center gap-4 text-sm">
+                <span className="text-zinc-600">Help Center</span>
+                <div className="rounded-full border border-venture-line bg-white px-3 py-2">{user?.name || 'Brian F.'}</div>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h1 className="font-display text-[36px] font-semibold leading-none tracking-tight">{title}</h1>
+              <div className="flex items-center gap-2">
+                {actions}
+              </div>
             </div>
           </header>
-          <main className="p-4 sm:p-6 lg:p-7">{children}</main>
+
+          <main className="space-y-4 p-4 sm:p-5">{children}</main>
         </section>
       </div>
     </div>
